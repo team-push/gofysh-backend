@@ -39,10 +39,10 @@ public class AuthController {
     private UserService goFyshUserService;
 
     @PostMapping("/login")
-    ResponseEntity<JwtAuthenticationResponse> login(@Valid @RequestBody LoginRequest loginRequest) {
+    JwtAuthenticationResponse login(@Valid @RequestBody LoginRequest loginRequest) {
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
-                        loginRequest.getEmail(),
+                        loginRequest.getUsername(),
                         loginRequest.getPassword()
                 )
         );
@@ -50,7 +50,7 @@ public class AuthController {
 
         String jwt = tokenService.createToken(authentication);
 
-        return ResponseEntity.ok(JwtAuthenticationResponse.builder().accessToken(jwt).build());
+        return JwtAuthenticationResponse.builder().accessToken(jwt).build();
     }
 
     @PostMapping("/register")

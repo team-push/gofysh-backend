@@ -1,11 +1,13 @@
 package com.gofysh.gofyshbackend.user.entity;
 
+import com.gofysh.gofyshbackend.message.entity.PushMessage;
 import com.gofysh.gofyshbackend.user.model.UserVO;
 import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.List;
 
 @Table(name="user")
 @Entity
@@ -30,6 +32,7 @@ public class User implements Serializable {
         return UserVO.builder()
                 .fullName(fullName)
                 .username(username)
+                .id(id)
                 .build();
     }
 }
